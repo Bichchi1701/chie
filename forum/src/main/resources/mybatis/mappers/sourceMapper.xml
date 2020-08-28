@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mappers.sourceMapper">    <!-- like package of class  -->
+	<!-- No need loop repository -->
+	<resultMap type="sourceVO" id="sourceResult">
+	
+		<result property="sourceid" column="sourceid"/>
+		<result property="date" column="date"/>
+		<result property="sourcename" column="sourcename"/>
+		<result property="size" column="size"/>
+		<result property="contentdetails" column="contentdetails"/>
+		<result property="title" column="roleaccount_id"/>
+		<result property="userid" column="status"/>
+		<result property="ctgid" column="avatar"/>
+		<result property="price" column="token"/>
+		<result property="avatar" column="money"/>
+		<result property="stateid" column="money"/>
+		
+	</resultMap>
+	
+	
+	<!-- make sql statement -->
+		<select id="selectAll" resultMap="sourceResult">  <!--  mappers.userMapper.selectAll   -->
+			<![CDATA[
+				select * from user order by userid desc
+			]]>
+		</select>
+		
+		<!--  selectOne(id=1)  -->
+		
+		<select id="selectOne" resultMap="sourceResult" parameterType="int">  <!--  mappers.userMapper.selectOne   -->
+			<![CDATA[
+				select * from source
+				where sourceid=#{id}
+			]]>
+		</select>
+		
+		<insert id="insert" parameterType="sourceVO" >
+		    <![CDATA[
+				insert into source
+				(date,sourcename,size,contentdetails,title,userid,ctgid,price,avatar,stateid)
+				values
+				(#{date},#{sourcename},#{size},#{contentdetails},#{title},#{userid},#{ctgid} #{price},#{avatar},#{stateid})
+			]]>
+		</insert>
+		
+		<update id="update" parameterType="userVO">
+			 <![CDATA[
+				update book set
+				date=#{date},
+				sourcename=#{sourcename},
+				size=#{size},
+				contentdetails=#{contentdetails},
+				title=#{title},
+				userid=#{userid},
+				ctgid=#{ctgid},
+				price=#{price},
+				avatar=#{avatar},
+				statetid=#{statetid}
+				
+			]]>
+		
+		</update>
+		
+		<delete id="delete" parameterType="int">
+			<![CDATA[
+			delete from source
+			where sourceid = #{sourceid}
+		]]>
+		</delete>
+		
+</mapper>
+
+
+
+
+
+

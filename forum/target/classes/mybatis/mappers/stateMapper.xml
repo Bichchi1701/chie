@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mappers.stateMapper">    <!-- like package of class  -->
+	<!-- No need loop repository -->
+	<resultMap type="stateVO" id="stateResult">
+		<result property="stateid" column="stateid"/>
+		<result property="statename" column="statename"/>
+	</resultMap>
+	
+	
+	<!-- make sql statement -->
+		<select id="selectAll" resultMap="stateResult">  <!--  mappers.userMapper.selectAll   -->
+			<![CDATA[
+				select * from stateproduct order by stateid desc
+			]]>
+		</select>
+		
+		<!--  selectOne(id=1)  -->
+		
+		<select id="selectOne" resultMap="stateResult" parameterType="int">  <!--  mappers.userMapper.selectOne   -->
+			<![CDATA[
+				select * from stateproduct
+				where stateid=#{id}
+			]]>
+		</select>
+		
+		<insert id="insert" parameterType="stateVO" >
+		    <![CDATA[
+				insert into stateproduct
+				(statename)
+				values
+				(#{statename})
+			]]>
+		</insert>
+		
+		<update id="update" parameterType="stateVO">
+			 <![CDATA[
+				update stateproduct set
+				statename=#{statename},
+				where stateid =#{stateid}
+			]]>
+		
+		</update>
+		
+		<delete id="delete" parameterType="int">
+			<![CDATA[
+			delete from stateproduct
+			where stateid = #{stateid}
+		]]>
+		</delete>
+		
+</mapper>
+
+
+
+
+
+

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mappers.categoryMapper">    <!-- like package of class  -->
+	<!-- No need loop repository -->
+	<resultMap type="categoryVO" id="categoryResult">
+		<result property="ctgid" column="ctgid"/>
+		<result property="ctgname" column="ctgname"/>
+		<result property="ctgdate" column="ctgdate"/>
+		<result property="parentid" column="parentid"/>
+	</resultMap>
+	
+	
+	<!-- make sql statement -->
+			<select id="selectAll" resultMap="categoryResult">  <!--  mappers.bookMapper.selectAll   -->
+			<![CDATA[
+				select * from category where parentid > 0;
+			]]>
+		</select>
+		
+		<select id="selectbyCategory" resultMap="categoryResult" parameterType="int">  <!--  mappers.userMapper.selectOne   -->
+			<![CDATA[
+			select a.ctgname, b.ctgname from category as a left join category as b on a.ctgid = b.parentid where a.parentid = 0
+			]]>
+		</select>
+		
+		
+		
+		<!--  selectOne(id=1)  -->
+		
+		<select id="selectOne" resultMap="categoryResult" parameterType="int">  <!--  mappers.userMapper.selectOne   -->
+			<![CDATA[
+				select * from category
+				where ctgid=#{id}
+			]]>
+		</select>
+		
+		<insert id="insert" parameterType="categoryVO" >
+		    <![CDATA[
+				insert into category
+				(ctgname,ctgdate,parentid)
+				values
+				(#{ctgname},#{ctgdate},#{parentid})
+			]]>
+		</insert>
+		
+		<update id="update" parameterType="categoryVO">
+			 <![CDATA[
+				update category set
+				ctgname=#{ctgname},
+				ctgdate=#{ctgdate},
+				parentid=#{parentid},
+			]]>
+		
+		</update>
+		
+		<delete id="delete" parameterType="int">
+			<![CDATA[
+			delete from category
+			where ctgid = #{ctgid}
+		]]>
+		</delete>
+		
+</mapper>
+
+
+
+
+
+

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<!-- 1.class name's alias -->
+	<typeAliases>
+	
+		<typeAlias type="tp.kits3.tcn.vo.user" alias="userVO" />
+		<typeAlias type="tp.kits3.tcn.vo.role" alias="roleVO"/>
+		<typeAlias type="tp.kits3.tcn.vo.category" alias="categoryVO"/>
+		<typeAlias type="tp.kits3.tcn.vo.source" alias="sourceVO"/>
+		<typeAlias type="tp.kits3.tcn.vo.stateproduct" alias="stateVO"/>
+	</typeAliases>
+	
+  	<!-- 2. config DB connection info like tomcat context.xml DataSource  -->
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC"></transactionManager>
+			<dataSource type="POOLED">
+				<property name="driver" value="org.mariadb.jdbc.Driver" />
+				<property name="url" value="jdbc:mariadb://localhost:3306/web" />
+				<property name="username" value="root" />
+				<property name="password" value="170198" />
+			</dataSource> 
+		</environment>
+	</environments>
+	<mappers>   
+		<!-- from /src/main/java -->
+		<mapper resource="mybatis/mappers/userMapper.xml" /> 	
+		<mapper resource="mybatis/mappers/roleMapper.xml" /> 
+		<mapper resource="mybatis/mappers/categoryMapper.xml"/> 
+		<mapper resource="mybatis/mappers/sourceMapper.xml"/> 
+		<mapper resource="mybatis/mappers/stateMapper.xml" /> 
+		
+		
+	</mappers>
+
+</configuration>
+
+

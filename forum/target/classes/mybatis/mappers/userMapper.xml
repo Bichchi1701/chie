@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mappers.userMapper">    <!-- like package of class  -->
+	<!-- No need loop repository -->
+	<resultMap type="userVO" id="userResult">
+	
+		<result property="userid" column="userid"/>
+		<result property="username" column="username"/>
+		<result property="password" column="password"/>
+		<result property="fullname" column="fullname"/>
+		<result property="email" column="email"/>
+		<result property="roleaccount_id" column="roleaccount_id"/>
+		<result property="status" column="status"/>
+		<result property="avatar" column="avatar"/>
+		<result property="token" column="token"/>
+		<result property="money" column="money"/>
+		
+	</resultMap>
+	
+	
+	<!-- make sql statement -->
+		<select id="selectAll" resultMap="userResult">  <!--  mappers.userMapper.selectAll   -->
+			<![CDATA[
+				select * from user order by userid desc
+			]]>
+		</select>
+		
+		<!--  selectOne(id=1)  -->
+		
+		<select id="selectOne" resultMap="userResult" parameterType="int">  <!--  mappers.userMapper.selectOne   -->
+			<![CDATA[
+				select * from user
+				where userid=#{id}
+			]]>
+		</select>
+		
+		<insert id="insert" parameterType="userVO" >
+		    <![CDATA[
+				insert into user
+				(username,password,fullname,email,roleaccount_id,status,avatar,token,money)
+				values
+				(#{username},#{password},#{fullname},#{email},#{roleaccount_id},#{status},#{avatar} #{token},#{money})
+			]]>
+		</insert>
+		
+		<update id="update" parameterType="userVO">
+			 <![CDATA[
+				update book set
+				username=#{username},
+				password=#{password},
+				fullname=#{fullname},
+				email=#{email},
+				roleaccount_id=#{roleaccount_id},
+				status=#{status},
+				avatar=#{avatar}
+				token=#{token}
+				money=#{money}
+				
+			]]>
+		
+		</update>
+		
+		<delete id="delete" parameterType="int">
+			<![CDATA[
+			delete from user
+			where userid = #{userid}
+		]]>
+		</delete>
+		
+</mapper>
+
+
+
+
+
+
